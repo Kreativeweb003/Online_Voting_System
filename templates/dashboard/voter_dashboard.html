@@ -1,0 +1,17 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block content %}
+
+<h2>Voter Dashboard</h2>
+
+<p>Welcome, {{ request.user.first_name }}</p>
+
+<p>Your Voter ID: {{ request.user.voter_id }}</p>
+
+<hr>
+
+<h3>Available Elections</h3>
+
+<p>You can vote in active elections here.</p>
+
+{% endblock %}

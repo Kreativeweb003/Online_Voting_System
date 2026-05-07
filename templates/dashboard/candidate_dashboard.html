@@ -1,0 +1,21 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block content %}
+
+<h2>Candidate Dashboard</h2>
+
+<p>Welcome, {{ request.user.first_name }}</p>
+
+<p>Your Voter ID: {{ request.user.voter_id }}</p>
+
+<hr>
+
+<h3>Candidate Actions</h3>
+
+<ul>
+    <li>Apply for Position</li>
+    <li>View Application Status</li>
+    <li>Check Votes Received</li>
+</ul>
+
+{% endblock %}

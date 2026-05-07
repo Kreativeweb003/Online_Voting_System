@@ -1,0 +1,194 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from .models import Election, CandidateApplication, Vote
+from .forms import CandidateApplicationForm
+from django.contrib import messages
+from .forms import ElectionForm
+
+
+
+# -------------------------
+# APPLY FOR ELECTION
+# -------------------------
+@login_required
+def apply_candidate(request, election_id):
+    user = request.user
+
+    if user.role != "candidate":
+        return render(request, "403.html")
+
+    election = get_object_or_404(Election, id=election_id)
+
+    if request.method == "POST":
+        form = CandidateApplicationForm(request.POST)
+
+        if form.is_valid():
+            application = form.save(commit=False)
+            application.user = user
+            application.election = election
+            application.save()
+
+            return redirect("candidate_dashboard")
+
+    else:
+        form = CandidateApplicationForm()
+
+    return render(request, "voting/apply.html", {"form": form, "election": election})
+    
+
+
+
+
+
+@login_required
+def vote(request, election_id, candidate_id):
+    user = request.user
+
+    if user.role != "voter":
+        return render(request, "403.html")
+
+    election = get_object_or_404(Election, id=election_id)
+    candidate = get_object_or_404(User, id=candidate_id)
+
+    # prevent duplicate voting
+    if Vote.objects.filter(voter=user, election=election).exists():
+        messages.error(request, "You have already voted in this election.")
+        return redirect("voter_dashboard")
+
+    Vote.objects.create(
+        voter=user,
+        candidate=candidate,
+        election=election
+    )
+
+    messages.success(request, "Vote submitted successfully!")
+    return redirect("voter_dashboard")
+
+#==================================================
+#   Admin Election Creation
+#==================================================
+
+@login_required
+def create_election(request):
+    if not request.user.is_superuser:
+        return render(request, "403.html")
+
+    if request.method == "POST":
+        form = ElectionForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('admin_election_list')
+
+    else:
+        form = ElectionForm()
+
+    return render(request, "admin/create_election.html", {"form": form})
+
+
+#==================================================
+#   Admin Election Update
+#==================================================
+
+@login_required
+def update_election(request, pk):
+    if not request.user.is_superuser:
+        return render(request, "403.html")
+
+    election = get_object_or_404(Election, id=pk)
+    form = ElectionForm(request.POST or None, instance=election)
+
+    if form.is_valid():
+        form.save()
+        return redirect('admin_election_list')
+
+    return render(request, "admin/update_election.html", {"form": form})
+
+
+#==================================================
+#   Admin Election Listings
+#==================================================
+
+@login_required
+def admin_election_list(request):
+    if not request.user.is_superuser:
+        return render(request, "403.html")
+
+    elections = Election.objects.all()
+
+    return render(request, "admin/election_list.html", {
+        "elections": elections
+    })
+
+
+#==================================================
+#   Admin Election Deletion
+#==================================================
+
+@login_required
+def delete_election(request, pk):
+    if not request.user.is_superuser:
+        return render(request, "403.html")
+
+    election = get_object_or_404(Election, id=pk)
+
+    if request.method == "POST":
+        election.delete()
+        return redirect('admin_election_list')
+
+    return render(request, "admin/delete_election.html", {"election": election})
+
+#==================================================
+#   Candidate Management Listing
+#==================================================
+
+@login_required
+def manage_candidates(request):
+    if not request.user.is_superuser:
+        return render(request, "403.html")
+
+    applications = CandidateApplication.objects.all()
+
+    return render(request, "admin/manage_candidates.html", {
+        "applications": applications
+    })
+
+
+#==================================================
+#   Candidate Approvement Functionality
+#==================================================
+
+@login_required
+def approve_candidate(request, app_id):
+    if not request.user.is_superuser:
+        return render(request, "403.html")
+
+    app = get_object_or_404(CandidateApplication, id=app_id)
+    app.status = "approved"
+    app.save()
+
+    return redirect('manage_candidates')
+
+#==================================================
+#   Candidate Rejection Functionality
+#==================================================
+
+
+@login_required
+def reject_candidate(request, app_id):
+    if not request.user.is_superuser:
+        return render(request, "403.html")
+
+    app = get_object_or_404(CandidateApplication, id=app_id)
+    app.status = "rejected"
+    app.save()
+
+    return redirect('manage_candidates')
+
+
+
+
+
+
+
+

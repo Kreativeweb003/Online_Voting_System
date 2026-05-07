@@ -1,0 +1,38 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+<h2>Create Account</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>First Name</label>
+    <input type="text" name="first_name"><br><br>
+
+    <label>Last Name</label>
+    <input type="text" name="last_name"><br><br>
+
+    <label>Email</label>
+    <input type="email" name="email"><br><br>
+
+    <label>Voter ID</label>
+    <input type="text" name="voter_id"><br><br>
+
+    <label>Role</label>
+    <select name="role">
+        <option value="voter">Voter</option>
+        <option value="candidate">Candidate</option>
+    </select><br><br>
+
+    <label>Password</label>
+    <input type="password" name="password"><br><br>
+
+    <label>Confirm Password</label>
+    <input type="password" name="confirm_password"><br><br>
+
+    <button type="submit">Register</button>
+</form>
+<a href="{% url 'login' %}">Login</a>
+
+{% endblock %}
