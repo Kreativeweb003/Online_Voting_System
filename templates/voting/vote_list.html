@@ -1,0 +1,74 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block content %}
+
+<div class="vote-page">
+
+    <div class="page-header">
+
+        <h1>All Votes</h1>
+
+        <p>
+            Total Votes:
+            <strong>{{ votes.count }}</strong>
+        </p>
+
+    </div>
+
+    <table border="1" cellpadding="10">
+
+        <tr>
+
+            <th>#</th>
+
+            <th>Voter</th>
+
+            <th>Candidate</th>
+
+            <th>Election</th>
+
+            <th>Date</th>
+
+        </tr>
+
+        {% for vote in votes %}
+
+        <tr>
+
+            <td>{{ forloop.counter }}</td>
+
+            <td>
+                {{ vote.voter.username }}
+            </td>
+
+            <td>
+                {{ vote.candidate.username }}
+            </td>
+
+            <td>
+                {{ vote.election.title }}
+            </td>
+
+            <td>
+                {{ vote.timestamp }}
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+
+            <td colspan="5">
+                No votes available
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+{% endblock %}

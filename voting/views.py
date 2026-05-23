@@ -4,6 +4,8 @@ from .models import Election, CandidateApplication, Vote
 from .forms import CandidateApplicationForm
 from django.contrib import messages
 from .forms import ElectionForm
+from django.db.models import Count
+
 
 
 
@@ -83,7 +85,7 @@ def create_election(request):
     else:
         form = ElectionForm()
 
-    return render(request, "admin/create_election.html", {"form": form})
+    return render(request, "admin/create_elections.html", {"form": form})
 
 
 #==================================================
@@ -187,8 +189,65 @@ def reject_candidate(request, app_id):
 
 
 
+#==================================================
+#   Voting Result Fuctionalities
+#==================================================
+
+@login_required
+def election_results(request, election_id):
+    election = get_object_or_404(Election, id=election_id)
+
+    # Get all votes for this election
+    votes = Vote.objects.filter(election=election)
+
+    # Count votes per candidate
+    results = votes.values('candidate').annotate(total_votes=Count('id')).order_by('-total_votes')
+
+    # Build readable result list
+    final_results = []
+
+    for item in results:
+        candidate_id = item['candidate']
+        candidate = get_object_or_404(User, id=candidate_id)
+
+        final_results.append({
+            'candidate': candidate,
+            'votes': item['total_votes']
+        })
+
+    # Determine winner (first in sorted list)
+    winner = final_results[0] if final_results else None
+
+    return render(request, "voting/results.html", {
+        "election": election,
+        "results": final_results,
+        "winner": winner
+    })
 
 
+#==================================================
+#   Admin vote page 
+#==================================================
 
+
+@login_required
+def admin_vote_list(request):
+
+    # ONLY ADMIN CAN ACCESS
+    if not request.user.is_superuser:
+        return redirect('login')
+
+    votes = Vote.objects.select_related(
+        'voter',
+        'candidate',
+        'election'
+    ).order_by('-timestamp')
+
+    context = {
+        'votes': votes
+    }
+
+    return render(request, 'voting/vote_list.html', context
+    )
 
 

@@ -4,9 +4,20 @@
 
 <h2>Login</h2>
 
+<!-- ERROR MESSAGES -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert-message">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
 <form method="POST">
     {% csrf_token %}
+    
 
+    
     <label>Email or Voter ID</label>
     <input type="text" name="username"><br><br>
 

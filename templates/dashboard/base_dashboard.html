@@ -9,10 +9,10 @@
 <body>
   
     <nav>
-        <a href="/dashboard/voter/">Voter</a>
-        <a href="/dashboard/candidate/">Candidate</a>
-        <a href="/admin/">Admin</a>
-        <a href="/accounts/login/">Logout</a>
+        <a href="{% url 'admin_vote_list' %}">Voter</a>
+        <a href="{% url 'manage_candidates'%}">Candidate</a>
+        <a href="{% url 'admin_dashboard'%}">Admin</a>
+        <a href="{% url 'logout'%}">Logout</a>
     </nav>
 
     <hr>

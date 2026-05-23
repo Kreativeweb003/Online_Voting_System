@@ -1,0 +1,15 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block content %}
+
+<h2>Update Election</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Update Election</button>
+</form>
+
+{% endblock %}

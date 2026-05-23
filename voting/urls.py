@@ -14,4 +14,9 @@ urlpatterns = [
     path('admin/candidates/', views.manage_candidates, name='manage_candidates'),
     path('admin/candidates/approve/<int:app_id>/', views.approve_candidate, name='approve_candidate'),
     path('admin/candidates/reject/<int:app_id>/', views.reject_candidate, name='reject_candidate'),
+    path('results/<int:election_id>/', views.election_results, name='election_results'),
+    
+    path(
+    'admin/votes/', views.admin_vote_list, name='admin_vote_list'
+),
 ]

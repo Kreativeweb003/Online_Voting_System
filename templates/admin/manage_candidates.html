@@ -1,0 +1,66 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block content %}
+
+<h2>Candidate Applications</h2>
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <th>Candidate</th>
+        <th>Election</th>
+        <th>Position</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for app in applications %}
+
+    <tr>
+
+        <td>
+            {{ app.user.first_name }}
+            {{ app.user.last_name }}
+        </td>
+
+        <td>
+            {{ app.election.title }}
+        </td>
+
+        <td>
+            {{ app.position }}
+        </td>
+
+        <td>
+            {{ app.status }}
+        </td>
+
+        <td>
+
+            <a href="{% url 'approve_candidate' app.id %}">
+                Approve
+            </a>
+
+            |
+
+            <a href="{% url 'reject_candidate' app.id %}">
+                Reject
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="5">
+            No candidate applications found
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

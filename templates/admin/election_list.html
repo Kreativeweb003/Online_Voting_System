@@ -1,0 +1,74 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block content %}
+
+<h2>Election Management</h2>
+
+<a href="{% url 'create_election' %}">
+    Create New Election
+</a>
+
+<hr>
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <th>Title</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for election in elections %}
+
+    <tr>
+        <td>{{ election.title }}</td>
+
+        <td>{{ election.start_date }}</td>
+
+        <td>{{ election.end_date }}</td>
+
+        <td>
+            {% if election.is_active %}
+                Active
+            {% else %}
+                Closed
+            {% endif %}
+        </td>
+
+        <td>
+
+            <a href="{% url 'update_election' election.id %}">
+                Edit
+            </a>
+
+            |
+
+            <a href="{% url 'delete_election' election.id %}">
+                Delete
+            </a>
+
+            |
+
+            <a href="{% url 'election_results' election.id %}">
+                Results
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="5">
+            No elections available
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

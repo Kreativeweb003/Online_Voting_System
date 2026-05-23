@@ -1,27 +1,33 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
-class User(models.Model):
+class User(AbstractUser):
+
     ROLE_CHOICES = (
         ('voter', 'Voter'),
         ('candidate', 'Candidate'),
     )
 
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    voter_id = models.CharField(
+        max_length=30,
+        unique=True
+    )
+
+    role = models.CharField(
+        max_length=20,
+        choices=ROLE_CHOICES,
+        default='voter'
+    )
 
     email = models.EmailField(unique=True)
-    voter_id = models.CharField(max_length=25, unique=True)
 
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES)
+    USERNAME_FIELD = 'email'
 
-    password = models.CharField(max_length=128)
+    REQUIRED_FIELDS = ['username', 'voter_id']
 
     def __str__(self):
         return self.email
-        
-
-
 
 
 

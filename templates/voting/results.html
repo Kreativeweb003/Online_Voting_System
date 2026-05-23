@@ -1,0 +1,27 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block content %}
+
+<h2>Results for: {{ election.title }}</h2>
+
+<hr>
+
+{% if winner %}
+    <h3>🏆 Winner: {{ winner.candidate.first_name }} {{ winner.candidate.last_name }}</h3>
+{% endif %}
+
+<table border="1">
+    <tr>
+        <th>Candidate</th>
+        <th>Votes</th>
+    </tr>
+
+    {% for item in results %}
+    <tr>
+        <td>{{ item.candidate.first_name }} {{ item.candidate.last_name }}</td>
+        <td>{{ item.votes }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
