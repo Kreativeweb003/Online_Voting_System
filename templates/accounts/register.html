@@ -2,46 +2,87 @@
 
 {% block content %}
 
-<h2>Create Account</h2>
+<div class="register-page">
 
-<!-- ERROR MESSAGES -->
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert-message">
-            {{ message }}
+    <h2 class="register-title">
+        Create Account
+    </h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="register-alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" class="register-form">
+        {% csrf_token %}
+
+        <div class="register-form-group">
+            <label>
+                First Name
+            </label>
+            <input type="text" name="first_name" class="register-input">
         </div>
-    {% endfor %}
-{% endif %}
 
-<form method="POST">
-    {% csrf_token %}
+        <div class="register-form-group">
+            <label>
+                Last Name
+            </label>
+            <input type="text" name="last_name" class="register-input">
+        </div>
 
-    <label>First Name</label>
-    <input type="text" name="first_name"><br><br>
+        <div class="register-form-group">
+            <label>
+                Email
+            </label>
+            <input type="email" name="email" class="register-input">
+        </div>
 
-    <label>Last Name</label>
-    <input type="text" name="last_name"><br><br>
+        <div class="register-form-group">
+            <label>
+                Voter ID
+            </label>
+            <input type="text" name="voter_id" class="register-input">
+        </div>
 
-    <label>Email</label>
-    <input type="email" name="email"><br><br>
+        <div class="register-form-group">
+            <label>
+                Role
+            </label>
+            <select name="role" class="register-input">
+                <option value="voter">Voter</option>
+                <option value="candidate">Candidate</option>
+            </select>
+        </div>
 
-    <label>Voter ID</label>
-    <input type="text" name="voter_id"><br><br>
+        <div class="register-form-group">
+            <label>
+                Password
+            </label>
+            <input type="password" name="password" class="register-input">
+        </div>
 
-    <label>Role</label>
-    <select name="role">
-        <option value="voter">Voter</option>
-        <option value="candidate">Candidate</option>
-    </select><br><br>
+        <div class="register-form-group">
+            <label>
+                Confirm Password
+            </label>
+            <input type="password" name="confirm_password" class="register-input">
+        </div>
 
-    <label>Password</label>
-    <input type="password" name="password"><br><br>
+        <button type="submit" class="register-btn">
+            Register
+        </button>
 
-    <label>Confirm Password</label>
-    <input type="password" name="confirm_password"><br><br>
+    </form>
 
-    <button type="submit">Register</button>
-</form>
-<a href="{% url 'login' %}">Login</a>
+    <div class="register-login-link">
+        <a href="{% url 'login' %}">
+            Login
+        </a>
+    </div>
+
+</div>
 
 {% endblock %}

@@ -1,32 +1,48 @@
 {% extends 'accounts/base.html' %}
-
 {% block content %}
 
-<h2>Login</h2>
+<div class="login-page">
+    <h2 class="login-title">
+        Login
+    </h2>
 
-<!-- ERROR MESSAGES -->
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert-message">
-            {{ message }}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="login-alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" class="login-form">
+        {% csrf_token %}
+
+        <div class="login-form-group">
+            <label>
+                Email or Voter ID
+            </label>
+
+            <input type="text" name="username" class="login-input">
         </div>
-    {% endfor %}
-{% endif %}
 
-<form method="POST">
-    {% csrf_token %}
-    
+        <div class="login-form-group">
+            <label>
+                Password
+            </label>
 
-    
-    <label>Email or Voter ID</label>
-    <input type="text" name="username"><br><br>
+            <input type="password" name="password" class="login-input">
+        </div>
 
-    <label>Password</label>
-    <input type="password" name="password"><br><br>
+        <button type="submit" class="login-btn">
+            Login
+        </button>
+    </form>
 
-    <button type="submit">Login</button>
-</form>
-
-<a href="{% url 'register' %}">Register</a>
+    <div class="login-register-link">
+        <a href="{% url 'register' %}">
+            Register
+        </a>
+    </div>
+</div>
 
 {% endblock %}
