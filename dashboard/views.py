@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from voting.models import Election
 
 
 # -----------------------
@@ -8,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def voter_dashboard(request):
     user = request.user
+    
+    elections = Election.objects.filter(is_active=True)
 
     if user.role != "voter":
         return render(request, "403.html")
@@ -20,7 +23,10 @@ def voter_dashboard(request):
 # -----------------------
 @login_required
 def candidate_dashboard(request):
+    elections = Election.objects.filter(is_active=True)
+    
     user = request.user
+    
 
     if user.role != "candidate":
         return render(request, "403.html")
