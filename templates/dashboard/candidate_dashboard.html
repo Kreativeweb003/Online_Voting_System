@@ -1,21 +1,81 @@
-{% extends 'dashboard/base_dashboard.html' %}
+{% extends 'dashboard/candidate_base.html' %}
 
 {% block content %}
 
-<h2>Candidate Dashboard</h2>
+<div class="candidate-dashboard">
 
-<p>Welcome, {{ request.user.first_name }}</p>
+    <div class="candidate-header">
 
-<p>Your Voter ID: {{ request.user.voter_id }}</p>
+        <h2>Candidate Dashboard</h2>
 
-<hr>
+        <p>
+            Welcome, {{ request.user.username }}
+        </p>
 
-<h3>Candidate Actions</h3>
+        <p>
+            Voter ID:
+            <strong>{{ request.user.voter_id }}</strong>
+        </p>
 
-<ul>
-    <li>Apply for Position</li>
-    <li>View Application Status</li>
-    <li>Check Votes Received</li>
-</ul>
+    </div>
+
+    <div class="candidate-actions">
+
+        <h3>Candidate Actions</h3>
+
+        <ul>
+            <li>Apply for Position</li>
+            <li>View Application Status</li>
+            <li>Check Votes Received</li>
+        </ul>
+
+    </div>
+
+    <div class="candidate-elections">
+
+        <h3>Available Elections</h3>
+
+        {% for election in elections %}
+
+            <div class="candidate-election-card">
+
+                <h4>
+                    {{ election.title }}
+                </h4>
+
+                <p>
+                    {{ election.description }}
+                </p>
+
+                <p>
+                    <strong>Start:</strong>
+                    {{ election.start_date }}
+                </p>
+
+                <p>
+                    <strong>End:</strong>
+                    {{ election.end_date }}
+                </p>
+
+                <a
+                    href="{% url 'apply_position' election.id %}"
+                    class="candidate-apply-btn"
+                >
+                    Apply
+                </a>
+
+            </div>
+
+        {% empty %}
+
+            <p>
+                No active elections available.
+            </p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
 
 {% endblock %}

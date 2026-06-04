@@ -1,57 +1,45 @@
-{% extends 'dashboard/base_dashboard.html' %}
+{% extends 'dashboard/admin_base.html' %}
 
 {% block content %}
 
 <div class="admin-dashboard">
 
-    <!-- PAGE HEADER -->
     <div class="dashboard-header">
+
         <h1>Admin Dashboard</h1>
 
         <p>
             Welcome,
             <strong>{{ request.user.username }}</strong>
         </p>
+
     </div>
 
-
-    <!-- DASHBOARD CARDS -->
     <div class="dashboard-cards">
 
-        <!-- MANAGE ELECTIONS -->
         <div class="dashboard-card">
-
             <a href="{% url 'admin_election_list' %}">
                 Elections
             </a>
-
         </div>
 
-
-        <!-- MANAGE CANDIDATES -->
         <div class="dashboard-card">
-
             <a href="{% url 'manage_candidates' %}">
                 Candidates
             </a>
-
         </div>
 
-
-        <!-- VIEW RESULTS -->
         <div class="dashboard-card">
-
             <a href="#">
                 Election Results
             </a>
-
         </div>
 
-
-        <!-- USERS -->
         <div class="dashboard-card">
 
-            <h3>Registered Users</h3>
+            <h3>
+                Registered Users
+            </h3>
 
             <p>
                 Manage voters and candidates.
@@ -64,9 +52,6 @@
         </div>
 
     </div>
-
-
-
 
 </div>
 

@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="{% static 'css/style.css' %}"
+      >
+      <title>Voter Dashboard</title>
+  </head>
+
+  <body class="voter-base-body">
+      <nav class="voter-base-navbar">
+          <div class="voter-base-logo">
+              Voter Portal
+          </div>
+          <div class="voter-base-links">
+              <a href="{% url 'voter_dashboard' %}">
+                  Dashboard
+              </a>
+              <a href="#">
+                  My Votes
+              </a>
+              <a href="{% url 'logout' %}">
+                  Logout
+              </a>
+          </div>
+      </nav>
+  
+      <main class="voter-base-content">
+          {% block content %}
+          {% endblock %}
+      </main>
+  
+  </body>
+</html>

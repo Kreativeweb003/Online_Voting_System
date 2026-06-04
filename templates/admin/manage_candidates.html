@@ -1,66 +1,70 @@
-{% extends 'dashboard/base_dashboard.html' %}
+{% extends 'dashboard/admin_base.html' %}
 
 {% block content %}
 
-<h2>Candidate Applications</h2>
+<div class="candidate-page">
 
-<table border="1" cellpadding="10">
+    <h2 class="candidate-title">
+        Candidate Applications
+    </h2>
 
-    <tr>
-        <th>Candidate</th>
-        <th>Election</th>
-        <th>Position</th>
-        <th>Status</th>
-        <th>Actions</th>
-    </tr>
+    <table class="candidate-table">
 
-    {% for app in applications %}
+        <tr>
+            <th>Candidate</th>
+            <th>Election</th>
+            <th>Position</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
 
-    <tr>
+        {% for app in applications %}
 
-        <td>
-            {{ app.user.first_name }}
-            {{ app.user.last_name }}
-        </td>
+        <tr>
 
-        <td>
-            {{ app.election.title }}
-        </td>
+            <td>
+                {{ app.user.first_name }}
+                {{ app.user.last_name }}
+            </td>
 
-        <td>
-            {{ app.position }}
-        </td>
+            <td>
+                {{ app.election.title }}
+            </td>
 
-        <td>
-            {{ app.status }}
-        </td>
+            <td>
+                {{ app.position }}
+            </td>
 
-        <td>
+            <td class="status {{ app.status }}">
+                {{ app.status }}
+            </td>
 
-            <a href="{% url 'approve_candidate' app.id %}">
-                Approve
-            </a>
+            <td class="candidate-actions">
 
-            |
+                <a href="{% url 'approve_candidate' app.id %}" class="approve">
+                    Approve
+                </a>
 
-            <a href="{% url 'reject_candidate' app.id %}">
-                Reject
-            </a>
+                <a href="{% url 'reject_candidate' app.id %}" class="reject">
+                    Reject
+                </a>
 
-        </td>
+            </td>
 
-    </tr>
+        </tr>
 
-    {% empty %}
+        {% empty %}
 
-    <tr>
-        <td colspan="5">
-            No candidate applications found
-        </td>
-    </tr>
+        <tr>
+            <td colspan="5">
+                No candidate applications found
+            </td>
+        </tr>
 
-    {% endfor %}
+        {% endfor %}
 
-</table>
+    </table>
+
+</div>
 
 {% endblock %}
