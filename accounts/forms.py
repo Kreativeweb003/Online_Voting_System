@@ -13,5 +13,5 @@ class RegisterForm(UserCreationForm):
             'voter_id',
             'role',
             'password1',
-            'password2'
+            'password2',
         ]
