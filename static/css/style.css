@@ -862,7 +862,75 @@
 }
 
 
+/* =========================
+   CREATE ELECTION PAGE
+========================= */
 
+.create-election-page {
+    max-width: 700px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.create-election-title {
+    margin-bottom: 20px;
+    color: #222;
+}
+
+/* form */
+
+.create-election-form {
+    width: 100%;
+}
+
+.create-election-group {
+    margin-bottom: 15px;
+}
+
+.create-election-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+}
+
+.create-election-group input,
+.create-election-group textarea,
+.create-election-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.create-election-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.create-election-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.create-election-btn {
+    background: #0d6efd;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.create-election-btn:hover {
+    background: #0b5ed7;
+}
 
 
 
