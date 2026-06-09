@@ -66,6 +66,40 @@ def vote(request, election_id, candidate_id):
     messages.success(request, "Vote submitted successfully!")
     return redirect("voter_dashboard")
 
+
+
+
+
+#==================================================
+#   Candidate List
+#==================================================
+
+@login_required
+def candidate_list(request, election_id):
+
+    election = get_object_or_404(Election, id=election_id)
+
+    candidates = CandidateApplication.objects.filter(
+        election=election,
+        status="approved"
+    )
+
+    return render(
+        request,
+        "voting/candidate_list.html",
+        {
+            "election": election,
+            "candidates": candidates
+        }
+    )
+
+
+
+
+
+
+
+
 #==================================================
 #   Admin Election Creation
 #==================================================

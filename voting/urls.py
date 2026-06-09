@@ -18,5 +18,7 @@ urlpatterns = [
     
     path(
     'admin/votes/', views.admin_vote_list, name='admin_vote_list'
-),
+    ),
+    
+    path('election/<int:election_id>/candidates/', views.candidate_list, name='candidate_list'),
 ]

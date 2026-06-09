@@ -41,9 +41,9 @@
                 <strong>End:</strong>
                 {{ election.end_date }}
             </p>
-
-            <a href="{% url 'vote_page' election.id %}" class="voter-vote-btn">
-                Vote Now
+            
+            <a href="{% url 'candidate_list' election.id %}">
+            View Candidates
             </a>
 
         </div>

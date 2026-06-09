@@ -15,7 +15,7 @@ def voter_dashboard(request):
     if user.role != "voter":
         return render(request, "403.html")
 
-    return render(request, "dashboard/voter_dashboard.html")
+    return render(request, "dashboard/voter_dashboard.html", {'elections': elections})
 
 
 # -----------------------
@@ -31,7 +31,7 @@ def candidate_dashboard(request):
     if user.role != "candidate":
         return render(request, "403.html")
 
-    return render(request, "dashboard/candidate_dashboard.html")
+    return render(request, "dashboard/candidate_dashboard.html", {'elections': elections})
 
 
 # -----------------------

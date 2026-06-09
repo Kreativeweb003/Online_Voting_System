@@ -1,0 +1,31 @@
+{% extends 'dashboard/voter_base.html' %}
+
+{% block content %}
+
+<h2>{{ election.title }} - Candidates</h2>
+
+{% for app in candidates %}
+
+<div class="candidate-card">
+
+    <p>
+        {{ app.user.first_name }} {{ app.user.last_name }}
+    </p>
+
+    <p>
+        Position: {{ app.position }}
+    </p>
+
+    <a href="{% url 'vote' election.id app.user.id %}">
+        Vote
+    </a>
+
+</div>
+
+{% empty %}
+
+<p>No approved candidates yet.</p>
+
+{% endfor %}
+
+{% endblock %}
