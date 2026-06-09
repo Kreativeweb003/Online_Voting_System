@@ -23,10 +23,10 @@ def voter_dashboard(request):
 # -----------------------
 @login_required
 def candidate_dashboard(request):
-    elections = Election.objects.filter(is_active=True)
     
     user = request.user
     
+    elections = Election.objects.filter(is_active=True)
 
     if user.role != "candidate":
         return render(request, "403.html")

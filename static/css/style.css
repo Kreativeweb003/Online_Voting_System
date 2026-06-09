@@ -933,6 +933,76 @@
 }
 
 
+/* =========================
+   UPDATE ELECTION PAGE
+========================= */
+
+.update-election-page {
+    max-width: 700px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.update-election-title {
+    margin-bottom: 20px;
+    color: #222;
+}
+
+.update-election-form {
+    width: 100%;
+}
+
+.update-election-group {
+    margin-bottom: 15px;
+}
+
+.update-election-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.update-election-group input,
+.update-election-group textarea,
+.update-election-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.update-election-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.update-election-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.update-election-btn {
+    background: #198754;
+    color: #ffffff;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.update-election-btn:hover {
+    opacity: 0.9;
+}
+
+
+
+
 
 
 

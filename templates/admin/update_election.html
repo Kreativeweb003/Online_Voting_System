@@ -2,14 +2,58 @@
 
 {% block content %}
 
-<h2>Update Election</h2>
+<div class="update-election-page">
 
-<form method="POST">
-    {% csrf_token %}
+    <h2 class="update-election-title">
+        Update Election
+    </h2>
 
-    {{ form.as_p }}
+    <form method="POST" class="update-election-form">
 
-    <button type="submit">Update Election</button>
-</form>
+        {% csrf_token %}
+
+        <div class="update-election-group">
+            <label for="{{ form.title.id_for_label }}">
+                Title
+            </label>
+            {{ form.title }}
+        </div>
+
+        <div class="update-election-group">
+            <label for="{{ form.description.id_for_label }}">
+                Description
+            </label>
+            {{ form.description }}
+        </div>
+
+        <div class="update-election-group">
+            <label for="{{ form.start_date.id_for_label }}">
+                Start Date
+            </label>
+            {{ form.start_date }}
+        </div>
+
+        <div class="update-election-group">
+            <label for="{{ form.end_date.id_for_label }}">
+                End Date
+            </label>
+            {{ form.end_date }}
+        </div>
+
+        <div class="update-election-checkbox">
+            {{ form.is_active }}
+
+            <label for="{{ form.is_active.id_for_label }}">
+                Active Election
+            </label>
+        </div>
+
+        <button type="submit" class="update-election-btn">
+            Update Election
+        </button>
+
+    </form>
+
+</div>
 
 {% endblock %}
