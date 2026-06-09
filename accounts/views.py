@@ -17,6 +17,8 @@ def register_view(request):
 
             user = form.save(commit=False)
 
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
             user.email = form.cleaned_data['email']
             user.voter_id = form.cleaned_data['voter_id']
             user.role = form.cleaned_data['role']
