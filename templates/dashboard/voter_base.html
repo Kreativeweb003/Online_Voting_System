@@ -10,7 +10,7 @@
       >
       <title>Voter Dashboard</title>
   </head>
-
+  
   <body class="voter-base-body">
       <nav class="voter-base-navbar">
           <div class="voter-base-logo">
@@ -28,11 +28,27 @@
               </a>
           </div>
       </nav>
+      {% if messages %}
+
+        <div class="voter-messages">  
+            {% for message in messages %}    
+                <div class="voter-alert voter-alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}     
+        </div>
+        
+      {% endif %}
   
       <main class="voter-base-content">
           {% block content %}
           {% endblock %}
       </main>
-  
+    <script>
+      setTimeout(() => {
+          const messages = document.querySelectorAll(".voter-alert");
+          messages.forEach(msg => msg.style.display = "none");
+      }, 4000);
+</script>
   </body>
 </html>

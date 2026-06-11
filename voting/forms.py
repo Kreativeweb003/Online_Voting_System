@@ -2,10 +2,33 @@ from django import forms
 from .models import CandidateApplication, Election
 
 
+
 class CandidateApplicationForm(forms.ModelForm):
+
     class Meta:
         model = CandidateApplication
-        fields = ['position', 'manifesto']
+
+        fields = [
+            'position',
+            'manifesto'
+        ]
+
+        widgets = {
+            'position': forms.TextInput(
+                attrs={
+                    'class': 'candidate-application-input',
+                    'placeholder': 'Enter position'
+                }
+            ),
+
+            'manifesto': forms.Textarea(
+                attrs={
+                    'class': 'candidate-application-input',
+                    'placeholder': 'Write your manifesto',
+                    'rows': 8
+                }
+            )
+        }
         
 
 

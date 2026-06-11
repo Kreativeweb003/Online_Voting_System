@@ -2,30 +2,43 @@
 
 {% block content %}
 
-<h2>{{ election.title }} - Candidates</h2>
+<div class="candidate-list-page">
 
-{% for app in candidates %}
+    <h2 class="candidate-list-title">
+        {{ election.title }} - Candidates
+    </h2>
 
-<div class="candidate-card">
+    <div class="candidate-list-wrapper">
 
-    <p>
-        {{ app.user.first_name }} {{ app.user.last_name }}
-    </p>
+        {% for app in candidates %}
 
-    <p>
-        Position: {{ app.position }}
-    </p>
+        <div class="candidate-list-card">
 
-    <a href="{% url 'vote' election.id app.user.id %}">
-        Vote
-    </a>
+            <div class="candidate-list-name">
+                {{ app.user.first_name }} {{ app.user.last_name }}
+            </div>
+
+            <div class="candidate-list-position">
+                Position:
+                <strong>{{ app.position }}</strong>
+            </div>
+
+            <a href="{% url 'vote' election.id app.user.id %}" class="candidate-list-vote-btn">
+                Vote
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p class="candidate-list-empty">
+            No approved candidates yet.
+        </p>
+
+        {% endfor %}
+
+    </div>
 
 </div>
-
-{% empty %}
-
-<p>No approved candidates yet.</p>
-
-{% endfor %}
 
 {% endblock %}

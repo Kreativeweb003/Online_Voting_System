@@ -1,15 +1,43 @@
-{% extends 'dashboard/base_dashboard.html' %}
+{% extends 'dashboard/candidate_base.html' %}
 
 {% block content %}
 
-<h2>Apply for: {{ election.title }}</h2>
+<div class="candidate-application-page">
 
-<form method="POST">
-    {% csrf_token %}
+    <h2 class="candidate-application-title">
+        Apply for: {{ election.title }}
+    </h2>
 
-    {{ form.as_p }}
+    <form method="POST" class="candidate-application-form">
 
-    <button type="submit">Submit Application</button>
-</form>
+        {% csrf_token %}
+
+        <div class="candidate-application-group">
+
+            <label for="{{ form.position.id_for_label }}">
+                Position
+            </label>
+
+            {{ form.position }}
+
+        </div>
+
+        <div class="candidate-application-group">
+
+            <label for="{{ form.manifesto.id_for_label }}">
+                Manifesto
+            </label>
+
+            {{ form.manifesto }}
+
+        </div>
+
+        <button type="submit" class="candidate-application-btn">
+            Submit Application
+        </button>
+
+    </form>
+
+</div>
 
 {% endblock %}

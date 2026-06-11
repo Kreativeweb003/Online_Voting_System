@@ -5,6 +5,7 @@ from .forms import CandidateApplicationForm
 from django.contrib import messages
 from .forms import ElectionForm
 from django.db.models import Count
+from accounts.models import User
 
 
 

@@ -1003,6 +1003,168 @@
 
 
 
+/* =========================
+   CANDIDATE APPLICATION
+========================= */
+
+.candidate-application-page {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.candidate-application-title {
+    margin-bottom: 20px;
+}
+
+.candidate-application-form {
+    width: 100%;
+}
+
+.candidate-application-group {
+    margin-bottom: 18px;
+}
+
+.candidate-application-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.candidate-application-group input,
+.candidate-application-group textarea,
+.candidate-application-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.candidate-application-group textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.candidate-application-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.candidate-application-btn:hover {
+    opacity: 0.9;
+}
+
+
+
+/* =========================
+   CANDIDATE LIST PAGE
+========================= */
+
+.candidate-list-page {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.candidate-list-title {
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.candidate-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.candidate-list-card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.candidate-list-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.candidate-list-position {
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.candidate-list-vote-btn {
+    display: inline-block;
+    padding: 10px 14px;
+    background: #2563eb;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.candidate-list-vote-btn:hover {
+    background: #1d4ed8;
+}
+
+.candidate-list-empty {
+    color: #777;
+}
+
+
+
+/* =========================
+   VOTER MESSAGES
+========================= */
+
+.voter-messages {
+    margin: 15px auto;
+    max-width: 800px;
+}
+
+.voter-alert {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+/* SUCCESS */
+.voter-alert-success {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
+
+/* ERROR */
+.voter-alert-error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+/* INFO */
+.voter-alert-info {
+    background: #dbeafe;
+    color: #1e3a8a;
+    border: 1px solid #93c5fd;
+}
+
+
+
+
+
 
 
 
