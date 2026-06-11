@@ -9,25 +9,13 @@
         <h2>Candidate Dashboard</h2>
 
         <p>
-            Welcome, {{ request.user.username }}
+            Welcome, {{ request.user.first_name }}
         </p>
 
         <p>
             Voter ID:
             <strong>{{ request.user.voter_id }}</strong>
         </p>
-
-    </div>
-
-    <div class="candidate-actions">
-
-        <h3>Candidate Actions</h3>
-
-        <ul>
-            <li>Apply for Position</li>
-            <li>View Application Status</li>
-            <li>Check Votes Received</li>
-        </ul>
 
     </div>
 
