@@ -1,0 +1,85 @@
+{% extends 'dashboard/candidate_base.html' %}
+
+{% block content %}
+
+<div class="candidate-applications-page">
+
+    <div class="candidate-applications-header">
+
+        <h2>
+            My Applications
+        </h2>
+
+        <p>
+            View all your election applications and their status.
+        </p>
+
+    </div>
+
+    <div class="candidate-applications-list">
+
+        {% for application in applications %}
+
+        <div class="candidate-application-card">
+
+            <div class="candidate-application-info">
+
+                <h3>
+                    {{ application.election.title }}
+                </h3>
+
+                <p>
+                    <strong>Position:</strong>
+                    {{ application.position }}
+                </p>
+
+                <p>
+                    <strong>Manifesto:</strong>
+                    {{ application.manifesto }}
+                </p>
+
+            </div>
+
+            <div class="candidate-application-status">
+
+                {% if application.status == "approved" %}
+
+                <span class="candidate-status-approved">
+                    Approved
+                </span>
+
+                {% elif application.status == "rejected" %}
+
+                <span class="candidate-status-rejected">
+                    Rejected
+                </span>
+
+                {% else %}
+
+                <span class="candidate-status-pending">
+                    Pending
+                </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="candidate-applications-empty">
+
+            <p>
+                You have not submitted any applications yet.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

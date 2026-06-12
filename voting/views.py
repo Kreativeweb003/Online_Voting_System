@@ -6,8 +6,7 @@ from django.contrib import messages
 from .forms import ElectionForm
 from django.db.models import Count
 from accounts.models import User
-
-
+from django.utils import timezone
 
 
 # -------------------------
@@ -40,22 +39,70 @@ def apply_candidate(request, election_id):
     
 
 
+#==================================================
+#   Voting Functionalities
+#==================================================
 
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib import messages
+from django.utils import timezone
 
 @login_required
 def vote(request, election_id, candidate_id):
+
     user = request.user
 
+    # Only voters can vote
     if user.role != "voter":
         return render(request, "403.html")
 
     election = get_object_or_404(Election, id=election_id)
+
     candidate = get_object_or_404(User, id=candidate_id)
 
-    # prevent duplicate voting
-    if Vote.objects.filter(voter=user, election=election).exists():
-        messages.error(request, "You have already voted in this election.")
+    # Election has not started
+    if timezone.now() < election.start_date:
+
+        messages.error(
+            request,
+            "This election has not started yet."
+        )
+
+        return redirect("voter_dashboard")
+
+    # Election has ended
+    if timezone.now() > election.end_date:
+
+        messages.error(
+            request,
+            "This election has ended. Voting is closed."
+        )
+
+        return redirect("voter_dashboard")
+
+    # Prevent voting for non-candidates
+    if candidate.role != "candidate":
+
+        messages.error(
+            request,
+            "Invalid candidate selected."
+        )
+
+        return redirect("voter_dashboard")
+
+    # Prevent duplicate voting
+    if Vote.objects.filter(
+        voter=user,
+        election=election
+    ).exists():
+
+        messages.error(
+            request,
+            "You have already voted in this election."
+        )
+
         return redirect("voter_dashboard")
 
     Vote.objects.create(
@@ -64,7 +111,11 @@ def vote(request, election_id, candidate_id):
         election=election
     )
 
-    messages.success(request, "Vote submitted successfully!")
+    messages.success(
+        request,
+        "Vote submitted successfully!"
+    )
+
     return redirect("voter_dashboard")
 
 
@@ -228,36 +279,60 @@ def reject_candidate(request, app_id):
 #   Voting Result Fuctionalities
 #==================================================
 
+
 @login_required
 def election_results(request, election_id):
+
     election = get_object_or_404(Election, id=election_id)
 
-    # Get all votes for this election
-    votes = Vote.objects.filter(election=election)
+    # Prevent viewing results before election ends
+    if timezone.now() < election.end_date:
+        messages.error(
+            request,
+            "Election results are not available until the election has ended."
+        )
 
-    # Count votes per candidate
-    results = votes.values('candidate').annotate(total_votes=Count('id')).order_by('-total_votes')
+        if request.user.role == "candidate":
+            return redirect("candidate_dashboard")
 
-    # Build readable result list
+        return redirect("voter_dashboard")
+
+    votes = Vote.objects.filter(
+        election=election
+    )
+
+    results = (
+        votes
+        .values('candidate')
+        .annotate(total_votes=Count('id'))
+        .order_by('-total_votes')
+    )
+
     final_results = []
 
     for item in results:
-        candidate_id = item['candidate']
-        candidate = get_object_or_404(User, id=candidate_id)
+
+        candidate = get_object_or_404(
+            User,
+            id=item['candidate']
+        )
 
         final_results.append({
-            'candidate': candidate,
-            'votes': item['total_votes']
+            "candidate": candidate,
+            "votes": item['total_votes']
         })
 
-    # Determine winner (first in sorted list)
     winner = final_results[0] if final_results else None
 
-    return render(request, "voting/results.html", {
-        "election": election,
-        "results": final_results,
-        "winner": winner
-    })
+    return render(
+        request,
+        "voting/results.html",
+        {
+            "election": election,
+            "results": final_results,
+            "winner": winner
+        }
+    )
 
 
 #==================================================
@@ -282,7 +357,61 @@ def admin_vote_list(request):
         'votes': votes
     }
 
-    return render(request, 'voting/vote_list.html', context
+    return render(request, 'voting/admin_vote_list.html', context
     )
+
+
+
+#==================================================
+#   Candidate Application list page 
+#==================================================
+
+@login_required
+def my_applications(request):
+
+    applications = CandidateApplication.objects.filter(
+        user=request.user
+    )
+
+    return render(
+        request,
+        'voting/my_applications.html',
+        {
+            'applications': applications
+        }
+    )
+
+
+
+
+
+#==================================================
+#   Candidate vote page 
+#==================================================
+
+@login_required
+def candidate_votes(request):
+
+    results = (
+        Vote.objects
+        .filter(candidate=request.user)
+        .values('election__title')
+        .annotate(total_votes=Count('id'))
+        .order_by('-total_votes')
+    )
+
+    return render(
+        request,
+        'voting/candidate_votes.html',
+        {
+            'results': results
+        }
+    )
+
+
+
+
+
+
 
 

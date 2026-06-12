@@ -1,27 +1,89 @@
-{% extends 'dashboard/base_dashboard.html' %}
+{% if request.user.is_superuser %}
+    {% extends 'dashboard/admin_base.html' %}
+{% elif request.user.role == 'candidate' %}
+    {% extends 'dashboard/candidate_base.html' %}
+{% else %}
+    {% extends 'dashboard/voter_base.html' %}
+{% endif %}
 
 {% block content %}
 
-<h2>Results for: {{ election.title }}</h2>
+<div class="election-results-page">
 
-<hr>
+    <div class="election-results-header">
 
-{% if winner %}
-    <h3>🏆 Winner: {{ winner.candidate.first_name }} {{ winner.candidate.last_name }}</h3>
-{% endif %}
+        <h2>
+            {{ election.title }} Results
+        </h2>
 
-<table border="1">
-    <tr>
-        <th>Candidate</th>
-        <th>Votes</th>
-    </tr>
+        <p>
+            Election outcome and vote count.
+        </p>
 
-    {% for item in results %}
-    <tr>
-        <td>{{ item.candidate.first_name }} {{ item.candidate.last_name }}</td>
-        <td>{{ item.votes }}</td>
-    </tr>
-    {% endfor %}
-</table>
+    </div>
+
+    {% if winner %}
+
+    <div class="election-results-winner">
+
+        <h3>
+            Winner
+        </h3>
+
+        <p>
+            {{ winner.candidate.first_name }}
+            {{ winner.candidate.last_name }}
+        </p>
+
+        <span>
+            {{ winner.votes }} Vote{{ winner.votes|pluralize }}
+        </span>
+
+    </div>
+
+    {% endif %}
+
+    <div class="election-results-list">
+
+        {% for result in results %}
+
+        <div class="election-results-card">
+
+            <div class="election-results-info">
+
+                <h4>
+                    {{ result.candidate.first_name }}
+                    {{ result.candidate.last_name }}
+                </h4>
+
+                <p>
+                    Candidate
+                </p>
+
+            </div>
+
+            <div class="election-results-votes">
+
+                {{ result.votes }}
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="election-results-empty">
+
+            <p>
+                No votes have been recorded for this election.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
 
 {% endblock %}

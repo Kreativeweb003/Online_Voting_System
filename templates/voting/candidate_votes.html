@@ -1,0 +1,61 @@
+{% extends 'dashboard/candidate_base.html' %}
+
+{% block content %}
+
+<div class="candidate-votes-page">
+
+    <div class="candidate-votes-header">
+
+        <h2>
+            My Votes
+        </h2>
+
+        <p>
+            View votes received across elections.
+        </p>
+
+    </div>
+
+    <div class="candidate-votes-list">
+
+        {% for result in results %}
+
+        <div class="candidate-vote-card">
+
+            <div class="candidate-vote-info">
+
+                <h3>
+                    {{ result.election__title }}
+                </h3>
+
+                <p>
+                    Election Vote Count
+                </p>
+
+            </div>
+
+            <div class="candidate-vote-total">
+
+                {{ result.total_votes }}
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="candidate-votes-empty">
+
+            <p>
+                No votes received yet.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

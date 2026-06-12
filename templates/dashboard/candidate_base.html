@@ -19,10 +19,10 @@
               <a href="{% url 'candidate_dashboard' %}">
                   Dashboard
               </a>
-              <a href="#">
+              <a href="{% url 'my_applications' %}">
                   Applications
               </a>
-              <a href="#">
+              <a href="{% url 'candidate_votes' %}">
                   Votes
               </a>
               <a href="{% url 'logout' %}">
@@ -30,11 +30,27 @@
               </a>
           </div>
       </nav>
+      {% if messages %}
+
+        <div class="voter-messages">  
+            {% for message in messages %}    
+                <div class="voter-alert voter-alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}     
+        </div>
+        
+      {% endif %}
   
       <main class="candidate-base-content">
           {% block content %}
           {% endblock %}
       </main>
-  
+    <script>
+      setTimeout(() => {
+          const messages = document.querySelectorAll(".voter-alert");
+          messages.forEach(msg => msg.style.display = "none");
+      }, 4000);
+    </script>
   </body>
 </html>

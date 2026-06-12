@@ -45,11 +45,12 @@
                     {{ election.end_date }}
                 </p>
 
-                <a
-                    href="{% url 'apply_candidate' election.id %}"
-                    class="candidate-apply-btn"
-                >
+                <a href="{% url 'apply_candidate' election.id %}" class="candidate-apply-btn">
                     Apply
+                </a>
+
+                <a href="{% url 'election_results' election.id %}" class="results-btn">
+                  View Results
                 </a>
 
             </div>

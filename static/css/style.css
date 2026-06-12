@@ -1168,4 +1168,266 @@
 
 
 
+/* =========================
+   CANDIDATE APPLICATIONS
+========================= */
+
+.candidate-applications-page {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.candidate-applications-header {
+    margin-bottom: 25px;
+}
+
+.candidate-applications-header h2 {
+    margin-bottom: 8px;
+}
+
+.candidate-applications-header p {
+    color: #666;
+}
+
+.candidate-applications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.candidate-application-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 18px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.candidate-application-info {
+    flex: 1;
+}
+
+.candidate-application-info h3 {
+    margin-bottom: 10px;
+}
+
+.candidate-application-info p {
+    margin-bottom: 8px;
+}
+
+.candidate-application-status {
+    margin-left: 20px;
+}
+
+.candidate-status-approved,
+.candidate-status-rejected,
+.candidate-status-pending {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.candidate-status-approved {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.candidate-status-rejected {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.candidate-status-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.candidate-applications-empty {
+    padding: 25px;
+    text-align: center;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+
+
+/* =========================
+   CANDIDATE VOTES PAGE
+========================= */
+
+.candidate-votes-page {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.candidate-votes-header {
+    margin-bottom: 25px;
+}
+
+.candidate-votes-header h2 {
+    margin-bottom: 8px;
+}
+
+.candidate-votes-header p {
+    color: #666;
+}
+
+.candidate-votes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.candidate-vote-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.candidate-vote-info h3 {
+    margin-bottom: 6px;
+}
+
+.candidate-vote-info p {
+    color: #666;
+}
+
+.candidate-vote-total {
+    min-width: 70px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 22px;
+    font-weight: 700;
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.candidate-votes-empty {
+    padding: 25px;
+    text-align: center;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+
+
+
+/* =========================
+   Results Button
+========================= */
+
+.results-btn {
+    display: inline-block;
+    padding: 10px 16px;
+    margin-top: 10px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.results-btn:hover {
+    transform: translateY(-2px);
+}
+
+
+
+/* =========================
+   ELECTION RESULTS PAGE
+========================= */
+
+.election-results-page {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.election-results-header {
+    margin-bottom: 25px;
+}
+
+.election-results-header h2 {
+    margin-bottom: 8px;
+}
+
+.election-results-header p {
+    color: #666;
+}
+
+.election-results-winner {
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid #ddd;
+}
+
+.election-results-winner h3 {
+    margin-bottom: 10px;
+}
+
+.election-results-winner p {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.election-results-winner span {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.election-results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.election-results-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.election-results-info h4 {
+    margin-bottom: 5px;
+}
+
+.election-results-info p {
+    color: #666;
+}
+
+.election-results-votes {
+    min-width: 70px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.election-results-empty {
+    padding: 25px;
+    text-align: center;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+}
+
+
 

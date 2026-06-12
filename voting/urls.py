@@ -16,9 +16,9 @@ urlpatterns = [
     path('admin/candidates/reject/<int:app_id>/', views.reject_candidate, name='reject_candidate'),
     path('results/<int:election_id>/', views.election_results, name='election_results'),
     
-    path(
-    'admin/votes/', views.admin_vote_list, name='admin_vote_list'
-    ),
+    path('admin/votes/', views.admin_vote_list, name='admin_vote_list'),
     
     path('election/<int:election_id>/candidates/', views.candidate_list, name='candidate_list'),
+    path('applications/', views.my_applications, name='my_applications'),
+    path('votes/', views.candidate_votes, name='candidate_votes'),
 ]
