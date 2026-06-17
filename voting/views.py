@@ -44,10 +44,6 @@ def apply_candidate(request, election_id):
 #==================================================
 
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib import messages
-from django.utils import timezone
 
 @login_required
 def vote(request, election_id, candidate_id):
@@ -357,7 +353,7 @@ def admin_vote_list(request):
         'votes': votes
     }
 
-    return render(request, 'voting/admin_vote_list.html', context
+    return render(request, 'voting/vote_list.html', context
     )
 
 
