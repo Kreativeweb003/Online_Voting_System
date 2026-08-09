@@ -4,6 +4,7 @@
 
 <div class="vote-page">
 
+    <!-- Page Header -->
     <div class="page-header">
 
         <h1>All Votes</h1>
@@ -15,57 +16,59 @@
 
     </div>
 
-    <table border="1" cellpadding="10">
 
-        <tr>
+    <!-- Votes Table -->
+    <table>
 
-            <th>#</th>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Voter</th>
+                <th>Candidate</th>
+                <th>Election</th>
+                <th>Date</th>
+            </tr>
+        </thead>
 
-            <th>Voter</th>
+        <tbody>
 
-            <th>Candidate</th>
+            {% for vote in votes %}
 
-            <th>Election</th>
+            <tr>
 
-            <th>Date</th>
+                <td>
+                    {{ forloop.counter }}
+                </td>
 
-        </tr>
+                <td>
+                    {{ vote.voter.username }}
+                </td>
 
-        {% for vote in votes %}
+                <td>
+                    {{ vote.candidate.username }}
+                </td>
 
-        <tr>
+                <td>
+                    {{ vote.election.title }}
+                </td>
 
-            <td>{{ forloop.counter }}</td>
+                <td>
+                    {{ vote.timestamp }}
+                </td>
 
-            <td>
-                {{ vote.voter.username }}
-            </td>
+            </tr>
 
-            <td>
-                {{ vote.candidate.username }}
-            </td>
+            {% empty %}
 
-            <td>
-                {{ vote.election.title }}
-            </td>
+            <tr>
+                <td colspan="5">
+                    No votes available
+                </td>
+            </tr>
 
-            <td>
-                {{ vote.timestamp }}
-            </td>
+            {% endfor %}
 
-        </tr>
-
-        {% empty %}
-
-        <tr>
-
-            <td colspan="5">
-                No votes available
-            </td>
-
-        </tr>
-
-        {% endfor %}
+        </tbody>
 
     </table>
 
