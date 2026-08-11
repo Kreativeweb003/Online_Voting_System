@@ -45,6 +45,14 @@ def apply_candidate(request, election_id):
 
 
 
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
+
+from .models import Election, User, Vote
+
+
 @login_required
 def vote(request, election_id, candidate_id):
 
@@ -54,11 +62,19 @@ def vote(request, election_id, candidate_id):
     if user.role != "voter":
         return render(request, "403.html")
 
-    election = get_object_or_404(Election, id=election_id)
+    # Get the election
+    election = get_object_or_404(
+        Election,
+        id=election_id
+    )
 
-    candidate = get_object_or_404(User, id=candidate_id)
+    # Get the selected candidate
+    candidate = get_object_or_404(
+        User,
+        id=candidate_id
+    )
 
-    # Election has not started
+    # Check if the election has not started
     if timezone.now() < election.start_date:
 
         messages.error(
@@ -68,7 +84,7 @@ def vote(request, election_id, candidate_id):
 
         return redirect("voter_dashboard")
 
-    # Election has ended
+    # Check if the election has ended
     if timezone.now() > election.end_date:
 
         messages.error(
@@ -78,7 +94,7 @@ def vote(request, election_id, candidate_id):
 
         return redirect("voter_dashboard")
 
-    # Prevent voting for non-candidates
+    # Make sure the selected user is actually a candidate
     if candidate.role != "candidate":
 
         messages.error(
@@ -88,7 +104,8 @@ def vote(request, election_id, candidate_id):
 
         return redirect("voter_dashboard")
 
-    # Prevent duplicate voting
+    # Prevent a voter from voting more than once
+    # in the same election
     if Vote.objects.filter(
         voter=user,
         election=election
@@ -101,12 +118,14 @@ def vote(request, election_id, candidate_id):
 
         return redirect("voter_dashboard")
 
+    # Create the vote
     Vote.objects.create(
         voter=user,
         candidate=candidate,
         election=election
     )
 
+    # Show success message
     messages.success(
         request,
         "Vote submitted successfully!"
