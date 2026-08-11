@@ -45,14 +45,6 @@ def apply_candidate(request, election_id):
 
 
 
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
-from django.utils import timezone
-
-from .models import Election, User, Vote
-
-
 @login_required
 def vote(request, election_id, candidate_id):
 
