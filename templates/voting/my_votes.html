@@ -1,0 +1,77 @@
+{% extends "voter/base.html" %}
+
+{% block content %}
+
+<div class="my-votes-page">
+
+    <div class="page-header">
+        <h1>My Votes</h1>
+
+        <p>
+            Elections you have participated in
+        </p>
+    </div>
+
+    {% if votes %}
+
+        <div class="votes-table-container">
+
+            <table class="votes-table">
+
+                <thead>
+                    <tr>
+                        <th>Election</th>
+                        <th>Candidate</th>
+                        <th>Date Voted</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for vote in votes %}
+
+                        <tr>
+
+                            <td>
+                                {{ vote.election }}
+                            </td>
+
+                            <td>
+                                {{ vote.candidate.get_full_name|default:vote.candidate.username }}
+                            </td>
+
+                            <td>
+                                {{ vote.created_at|date:"M d, Y - h:i A" }}
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-votes">
+
+            <h2>No Votes Yet</h2>
+
+            <p>
+                You have not participated in any election yet.
+            </p>
+
+            <a href="{% url 'voter_dashboard' %}">
+                View Elections
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

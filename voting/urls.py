@@ -21,4 +21,5 @@ urlpatterns = [
     path('election/<int:election_id>/candidates/', views.candidate_list, name='candidate_list'),
     path('applications/', views.my_applications, name='my_applications'),
     path('votes/', views.candidate_votes, name='candidate_votes'),
+    path("my-votes/", views.my_votes, name="my_votes"),
 ]

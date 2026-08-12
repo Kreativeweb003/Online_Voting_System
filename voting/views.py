@@ -417,7 +417,31 @@ def candidate_votes(request):
 
 
 
+@login_required
+def my_votes(request):
 
+    user = request.user
+
+    # Only voters can access this page
+    if user.role != "voter":
+        return render(request, "403.html")
+
+    votes = Vote.objects.filter(
+        voter=user
+    ).select_related(
+        "election",
+        "candidate"
+    ).order_by(
+        "-created_at"
+    )
+
+    return render(
+        request,
+        "voting/my_votes.html",
+        {
+            "votes": votes
+        }
+    )
 
 
 
