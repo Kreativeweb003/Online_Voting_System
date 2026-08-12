@@ -1647,3 +1647,149 @@
 
 
 
+
+
+/* ==============================
+   MY VOTES PAGE
+   ============================== */
+
+.my-votes-page {
+    width: 100%;
+    padding: 25px;
+}
+
+/* Page Header */
+.my-votes-page .page-header {
+    margin-bottom: 25px;
+}
+
+.my-votes-page .page-header h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.my-votes-page .page-header p {
+    margin: 0;
+    color: #777;
+    font-size: 15px;
+}
+
+
+/* Votes Table Container */
+.votes-table-container {
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Votes Table */
+.votes-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.votes-table thead {
+    background: #f5f6f8;
+}
+
+.votes-table th {
+    padding: 16px 18px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.votes-table td {
+    padding: 16px 18px;
+    font-size: 14px;
+    color: #555;
+    border-bottom: 1px solid #eee;
+}
+
+.votes-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.votes-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+.votes-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Candidate */
+.votes-table td:nth-child(2) {
+    font-weight: 600;
+    color: #333;
+}
+
+
+/* Empty State */
+.empty-votes {
+    background: #fff;
+    padding: 50px 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.empty-votes h2 {
+    margin: 0 0 10px;
+    font-size: 22px;
+}
+
+.empty-votes p {
+    margin: 0 0 25px;
+    color: #777;
+}
+
+.empty-votes a {
+    display: inline-block;
+    padding: 11px 20px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #fff;
+    background: #007bff;
+    transition: 0.2s ease;
+}
+
+.empty-votes a:hover {
+    opacity: 0.9;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .my-votes-page {
+        padding: 15px;
+    }
+
+    .my-votes-page .page-header h1 {
+        font-size: 23px;
+    }
+
+    .votes-table-container {
+        border-radius: 8px;
+    }
+
+    .votes-table th,
+    .votes-table td {
+        padding: 13px 14px;
+    }
+}
+
+
+
+
+

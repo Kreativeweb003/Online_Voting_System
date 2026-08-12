@@ -1,4 +1,4 @@
-{% extends "voter/base.html" %}
+{% extends "dashboard/voter_base.html" %}
 
 {% block content %}
 
@@ -6,10 +6,7 @@
 
     <div class="page-header">
         <h1>My Votes</h1>
-
-        <p>
-            Elections you have participated in
-        </p>
+        <p>View the elections you have participated in.</p>
     </div>
 
     {% if votes %}
@@ -31,7 +28,6 @@
                     {% for vote in votes %}
 
                         <tr>
-
                             <td>
                                 {{ vote.election }}
                             </td>
@@ -41,9 +37,8 @@
                             </td>
 
                             <td>
-                                {{ vote.created_at|date:"M d, Y - h:i A" }}
+                                {{ vote.timestamp|date:"M d, Y - h:i A" }}
                             </td>
-
                         </tr>
 
                     {% endfor %}

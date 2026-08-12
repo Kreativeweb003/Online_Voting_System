@@ -432,7 +432,7 @@ def my_votes(request):
         "election",
         "candidate"
     ).order_by(
-        "-created_at"
+        "timestamp"
     )
 
     return render(
